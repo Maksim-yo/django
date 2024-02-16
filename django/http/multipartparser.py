@@ -391,15 +391,7 @@ class MultiPartParser:
         So while this function does sanitize filenames to some extent, the
         resulting filename should still be considered as untrusted user input.
         """
-        file_name = html.unescape(file_name)
-        file_name = file_name.rsplit("/")[-1]
-        file_name = file_name.rsplit("\\")[-1]
-        # Remove non-printable characters.
-        file_name = "".join([char for char in file_name if char.isprintable()])
-
-        if file_name in {"", ".", ".."}:
-            return None
-        return file_name
+        return file_name.strip()
 
     IE_sanitize = sanitize_file_name
 
